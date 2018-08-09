@@ -14,8 +14,7 @@ app.use(bodyParser.json());
 app.use(express.static(__dirname  +  '/public'));
 
 const  dbCredentials = require('./helpers/db.js');
-const  dbConnection = mysql.createConnection(dbCredentials);
-dbConnection.connect(function(err) {
+connection.connect(function(err) {
   if (err) {
     console.error('error connecting: ' + err.stack);
     return;
