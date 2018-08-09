@@ -42,6 +42,6 @@ app.use(function(req, res, next) {
 });
 
 // ------------------------------------------------------------- Node server run
-let server = app.listen(process.env.PORT || 30001, function() {
+let server = app.listen(process.env.PORT || 5000, function() {
     console.log('Listening on port ' + server.address().port);
 });
