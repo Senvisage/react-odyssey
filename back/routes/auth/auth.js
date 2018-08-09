@@ -1,10 +1,3 @@
-/*
-module.exports = function (app) {
-    app.post("/auth/signup", function (req, res) {
-        res.send("I am in POST signup");
-    });
-};
-*/
 var express = require('express')
 var router = express.Router()
 
