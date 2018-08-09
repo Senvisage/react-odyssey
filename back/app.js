@@ -13,8 +13,8 @@ app.use(bodyParser.urlencoded({ extended:  false }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname  +  '/public'));
 
-const  dbCredentials = require('./helpers/db.js');
-connection.connect(function(err) {
+const  dbConnection = require('./helpers/db.js');
+dbConnection.connect(function(err) {
   if (err) {
     console.error('error connecting: ' + err.stack);
     return;
