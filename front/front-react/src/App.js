@@ -2,7 +2,23 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 
+import Signup from './components/Signup'
+
+const DEFAULT_STATE = {
+  email: "toto@wcs.fr"
+}
+
 class App extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { ...DEFAULT_STATE }
+  }
+
+  onSignupChange = (event) => {
+    console.log("Changed the field to "+event.target.value+" !");
+    this.setState({email: event.target.value});
+  }
+
   render() {
     return (
       <div className="App">
@@ -13,6 +29,10 @@ class App extends Component {
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+        <Signup
+          email={this.state.email}
+          onChange={this.onSignupChange} />
+
       </div>
     );
   }
