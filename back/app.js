@@ -19,7 +19,7 @@ dbConnection.connect(function(err) {
     console.error('error connecting: ' + err.stack);
     return;
   }
-  console.log('connected as id ' + connection.threadId);
+  console.log('connected as id ' + dbConnection.threadId);
 });
 
 // ---------------------------------------------------------- API implementation
