@@ -5,12 +5,23 @@ const  express  =  require('express');
 const  bodyParser  =  require('body-parser');
 const  morgan  =  require('morgan');
 const  app  =  express();
+const  mysql      = require('mysql');
 
 // ----------------------------------------------------------- App configuration
 app.use(morgan('dev'));
 app.use(bodyParser.urlencoded({ extended:  false }));
 app.use(bodyParser.json());
 app.use(express.static(__dirname  +  '/public'));
+
+const  dbCredentials = require('./helpers/db.js');
+const  dbConnection = mysql.createConnection(dbCredentials);
+dbConnection.connect(function(err) {
+  if (err) {
+    console.error('error connecting: ' + err.stack);
+    return;
+  }
+  console.log('connected as id ' + connection.threadId);
+});
 
 // ---------------------------------------------------------- API implementation
 app.get("/", (req,res) => {
