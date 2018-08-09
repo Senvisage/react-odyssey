@@ -17,8 +17,12 @@ app.get("/", (req,res) => {
     res.send("Welcome Home");
 })
 
+// Auth Routes
+var auth = require('./routes/auth/auth');
+app.use('/auth', auth);
+
 // Other routes
-require("./routes/auth/auth")(app);
+//require("./routes/auth/auth")(app);
 
 // #404 'Not Found'
 app.use(function(req, res, next) {
