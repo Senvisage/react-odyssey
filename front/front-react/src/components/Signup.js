@@ -6,7 +6,8 @@ const DEFAULT_STATE = {
   password: "monPassw0rd",
   passwordbis: "monPassw0rd",
   name: "James",
-  lastname: "Bond"
+  lastname: "Bond",
+  flash: ""
 }
 class Signup extends Component {
   constructor(props) {
