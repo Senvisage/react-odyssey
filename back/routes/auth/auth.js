@@ -1,6 +1,6 @@
 var express = require('express')
 var router = express.Router()
-const dbConnection = require('./helpers/db.js');
+const dbConnection = require('./../../helpers/db.js');
 
 // middleware that is specific to this router
 router.use(function timeLog (req, res, next) {
