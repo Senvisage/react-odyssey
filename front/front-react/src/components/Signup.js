@@ -1,4 +1,7 @@
 import React, { Component } from 'react';
+import TextField from '@material-ui/core/TextField';
+import Button from '@material-ui/core/Button';
+
 import './Signup.css';
 
 const DEFAULT_STATE = {
@@ -56,12 +59,12 @@ class Signup extends Component {
       <div className="Signup">
          <h1>{JSON.stringify(this.state,1,1)}</h1>
          <form onSubmit={this.onSubmit}>
-           <input type="text" name="email" placeholder="Your E-mail" onChange={this.updateEmail} />
-           <input type="password" name="password" placeholder="Your Password" onChange={this.updatePassword}/>
-           <input type="password" name="passwordbis" placeholder="Your Password (check)" onChange={this.updatePasswordbis}/>
-           <input type="text" name="name" placeholder="Your First Name" onChange={this.updateName} />
-           <input type="text" name="lastname" placeholder="Your Last Name" onChange={this.updateLastname} />
-           <input type="submit" value="Sign up !" />
+           <TextField  type="text" name="email" placeholder="Your E-mail" onChange={this.updateEmail} />
+           <TextField  type="password" name="password" placeholder="Your Password" onChange={this.updatePassword}/>
+           <TextField  type="password" name="passwordbis" placeholder="Your Password (check)" onChange={this.updatePasswordbis}/>
+           <TextField  type="text" name="name" placeholder="Your First Name" onChange={this.updateName} />
+           <TextField  type="text" name="lastname" placeholder="Your Last Name" onChange={this.updateLastname} />
+           <Button color="primary" type="submit" value="Sign up !" >Sign up !</Button>
          </form>
       </div>
     )
