@@ -33,8 +33,13 @@ class Signup extends Component {
     })
     .then(res  =>  res.json())
     .then(
-        res  =>  this.setState({"flash":  res.flash}),
-        err  =>  this.setState({"flash":  err.flash})
+      res  =>  {
+        this.setState({"flash":  res.flash})
+        this.props.history.push('/signin');
+      },
+      err  =>  {
+        this.setState({"flash":  err.flash})
+      },
     )
   }
   updateEmail = (event) => {

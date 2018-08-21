@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import List from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
-
+import Button from '@material-ui/core/Button';
 
 import './Profile.css';
 
 const DEFAULT_STATE = {
-  email: "mon@email.com",
-  name: "James",
-  lastname: "Bond",
+  email: "",
+  name: "",
+  lastname: "",
   flash: ""
 }
 class Profile extends Component {
@@ -19,6 +19,11 @@ class Profile extends Component {
   }
 
   //------------------------------------------------------------------- Handlers
+
+  onLogoutClick = (event) => {
+    console.log("Disconnected");
+    this.props.history.push('/');
+  }
 
   //--------------------------------------------------------------------- Render
   render() {
@@ -31,6 +36,7 @@ class Profile extends Component {
           <ListItem><ListItemText>Name: {this.state.name}</ListItemText></ListItem>
           <ListItem><ListItemText>Lastname: {this.state.lastname}</ListItemText></ListItem>
         </List>
+        <Button color="primary" onClick={this.onLogoutClick} >Log out !</Button>
       </div>
     )
   }
