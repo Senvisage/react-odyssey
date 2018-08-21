@@ -22,7 +22,7 @@ class Signin extends Component {
     console.log("Submitted form :  ");
     console.log(this.state);
     fetch("/auth/Signin", {
-        method:  'POST',
+        method:  'GET',
         headers:  new  Headers({
             'Content-Type':  'application/json'
         }),
