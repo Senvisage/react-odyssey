@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import MuiThemeProvider from '@material-ui/core/styles/MuiThemeProvider';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
+import { Switch, Route } from 'react-router'
+import { BrowserRouter } from 'react-router-dom'
 
 import './App.css';
 import Signup from './components/Signup'
+import Signin from './components/Signin'
+import Profile from './components/Profile'
 
+const theme = createMuiTheme();
 const DEFAULT_STATE = {}
 class App extends Component {
   constructor(props) {
@@ -14,7 +19,7 @@ class App extends Component {
   }
   render() {
     return (
-      <MuiThemeProvider  >
+      <MuiThemeProvider theme={theme} >
           <Grid  container
             alignItems='center'
             style={{ height:  '100%' }}>
@@ -24,14 +29,21 @@ class App extends Component {
                 style={{ margin:  32 }}>
                   <Grid  container
                     alignItems='center'
-                    justify='center'>
+                    justify='center'
+                    alignContent='center' >
                       <Grid  item  xs={12}  sm={6}
-                        style={{ 'text-align':  'center' }}>
-                          <img  src="http://images.innoveduc.fr/react_odyssey_homer/wildhomer.png"  />
+                        style={{ 'textAlign':  'center' }}>
+                          <img alt="" src="http://images.innoveduc.fr/react_odyssey_homer/wildhomer.png"  />
                       </Grid>
-                      <Grid  item  xs={12}  sm={6}
-                        alignContent='center'>
-                        <Signup  />
+                      <Grid  item  xs={12}  sm={6}>
+                        <BrowserRouter>
+                          <Switch>
+                            <Route exact path="/" component={Signin}/>
+                            <Route path="/signup" component={Signup}/>
+                            <Route path="/signin" component={Signin}/>
+                            <Route path="/profile" component={Profile}/>
+                          </Switch>
+                        </BrowserRouter>
                       </Grid>
                   </Grid>
               </Paper>
