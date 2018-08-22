@@ -30,7 +30,7 @@ class App extends Component {
     console.log("Todo: Reset state.profile on 'Log out'");
   };
 
-  signinHandleLogIn = event => {
+  signinHandleLogIn = data => {
     console.log("Todo: Set state.profile on 'Log in' [App]");
   };
 
