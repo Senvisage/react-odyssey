@@ -24,11 +24,16 @@ router.post("/signup", function(req, res) {
 });
 router.post("/signin", function(req, res) {
   var query = dbConnection.query(
-    "SELECT * FROM users WHERE email=? AND password=?",
+    "SELECT * FROM users WHERE email=? AND password=? LIMIT 1",
     [req.body.email, req.body.password],
     function(error, results, fields) {
       if (error) res.status(500).json({ flash: error.message });
-      res.status(200).json(results);
+      res
+        .status(200)
+        .json({
+          flash: "User has been signed up !",
+          email: result.rows[0].email
+        });
     }
   );
 });
