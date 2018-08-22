@@ -21,7 +21,7 @@ class Profile extends Component {
   //------------------------------------------------------------------- Handlers
 
   onLogoutClick = (event) => {
-    console.log("Disconnected");
+    this.setState(DEFAULT_STATE);
     this.props.history.push('/');
   }
 

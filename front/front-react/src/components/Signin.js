@@ -19,14 +19,11 @@ class Signin extends Component {
   //------------------------------------------------------------------- Handlers
   onSubmit = (event) => {
     event.preventDefault();
-    console.log("Submitted form :  ");
-    console.log(this.state);
     fetch("/auth/signin", {
         method:  'GET',
         headers:  new  Headers({
             'Content-Type':  'application/json'
         }),
-        body:  JSON.stringify(this.state),
     })
     .then(res  =>  res.json())
     .then(
