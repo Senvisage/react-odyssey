@@ -28,6 +28,8 @@ router.post("/signin", function(req, res) {
     [req.body.email, req.body.password],
     function(error, results, fields) {
       if (error) res.status(500).json({ flash: error.message });
+      if (rows.length === 0)
+        res.status(500).json({ flash: "User not found !" });
       res.status(200).json({
         flash: "User has been signed up !",
         email: results.rows[0].email
