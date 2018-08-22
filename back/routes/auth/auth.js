@@ -48,7 +48,9 @@ router.post("/signin", function(req, res) {
             " " +
             results[0].lastname +
             " has been signed in !",
-          email: results[0].email
+          email: results[0].email,
+          name: results[0].name,
+          lastname: results[0].lastname
         });
       }
     }
