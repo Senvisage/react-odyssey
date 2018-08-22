@@ -35,7 +35,7 @@ router.post("/signin", function(req, res) {
       if (error) res.status(500).json({ flash: error.message });
 
       //Not found
-      if (results.length === 0) {
+      if (results[0] === undefined) {
         console.log("It seems we found no one...");
         res.status(500).json({ flash: "No user found !" });
       } else {
