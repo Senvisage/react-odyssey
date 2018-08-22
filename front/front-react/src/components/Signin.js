@@ -19,7 +19,7 @@ class Signin extends Component {
       .then(res => res.json())
       .then(
         res => {
-          this.props.onSubmitSuccess();
+          this.props.onLogIn();
           this.props.history.push("/profile");
         },
         err => {
