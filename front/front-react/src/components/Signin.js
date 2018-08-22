@@ -29,6 +29,7 @@ class Signin extends Component {
       .then(
         res => {
           this.setState({ flash: res.flash });
+          this.setState({ resultSet: res });
           this.props.history.push("/profile");
         },
         err => {
