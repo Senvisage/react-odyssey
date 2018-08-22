@@ -18,7 +18,8 @@ const DEFAULT_STATE = {
     passwordbis: "D'oh !",
     name: "Homer",
     lastname: "Simpson"
-  }
+  },
+  flash: ""
 };
 class App extends Component {
   constructor(props) {
@@ -26,12 +27,14 @@ class App extends Component {
     this.state = { ...DEFAULT_STATE };
   }
 
-  profileHandleLogOut = event => {
-    console.log("Todo: Reset state.profile on 'Log out'");
+  profileHandleLogOut = data => {
+    console.log("Todo: Reset state.profile on 'Log out' [App]");
+    console.log(data);
+    this.setState({ flash: data.flash, profile: DEFAULT_STATE.profile });
   };
 
   signinHandleLogIn = data => {
-    console.log("Todo: Set state.profile on 'Log in' [App]");
+    this.setState(data);
   };
 
   render() {
@@ -55,13 +58,32 @@ class App extends Component {
                 <Grid item xs={12} sm={6}>
                   <BrowserRouter>
                     <Switch>
-                      <Route exact path="/" component={Signin} />
                       <Route
-                        path="/signup"
-                        component={Signup}
-                        onLogIn={this.signinHandleLogIn}
+                        exact
+                        path="/"
+                        render={props => (
+                          <Signin
+                            {...props}
+                            email={this.state.profile.email}
+                            name={this.state.profile.name}
+                            lastname={this.state.profile.lastname}
+                            onLogIn={this.signinHandleLogIn}
+                          />
+                        )}
                       />
-                      <Route path="/signin" component={Signin} />
+                      <Route path="/signup" component={Signup} />
+                      <Route
+                        path="/signin"
+                        render={props => (
+                          <Signin
+                            {...props}
+                            email={this.state.profile.email}
+                            name={this.state.profile.name}
+                            lastname={this.state.profile.lastname}
+                            onLogIn={this.signinHandleLogIn}
+                          />
+                        )}
+                      />
                       <Route
                         path="/profile"
                         render={props => (
