@@ -19,17 +19,13 @@ class Signin extends Component {
       .then(res => res.json())
       .then(
         res => {
-          this.props.onLogIn();
+          this.props.onLogIn(res);
           this.props.history.push("/profile");
         },
         err => {
           this.setState({ flash: err.flash });
         }
       );
-  };
-  onSubmitSuccess = data => {
-    console.log("Todo: set App state with ajax data on 'Login' [Signin]");
-    this.props.signinHandleLogIn(data);
   };
   updateEmail = event => {
     this.setState({ email: event.target.value });

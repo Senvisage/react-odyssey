@@ -9,7 +9,7 @@ import "./Profile.css";
 class Profile extends Component {
   //------------------------------------------------------------------- Handlers
   onLogoutClick = event => {
-    this.props.onLogOut();
+    this.props.onLogOut({ flash: "User has been logged out !" });
     this.props.history.push("/");
   };
 
