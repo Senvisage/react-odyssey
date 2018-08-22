@@ -30,13 +30,31 @@ router.post("/signin", function(req, res) {
     "SELECT * FROM users WHERE email=? AND password=? LIMIT 1",
     [req.body.email, req.body.password],
     function(error, results, fields) {
-      if (error) res.status(500).json({ flash: error.message });
+      //Crashed
+      if (error)
+        res
+          .status(500)
+          .json({ flash: error.message })
+          .end();
 
-      if (results.rows === undefined)
-        res.status(500).json({ flash: "No user found !" });
+      //Not found
+      if (results.rows === undefined) {
+        console.log("It seems we found no one...");
+        res
+          .status(500)
+          .json({ flash: "No user found !" })
+          .end();
+      }
+
+      //All went well
       console.log("Rows retrieved: ", results.rows.length); //Debug
       res.status(200).json({
-        flash: "User has been signed up !",
+        flash:
+          "User " +
+          results.rows[0].name +
+          " " +
+          results.rows[0].lastname +
+          " has been signed in !",
         email: results.rows[0].email
       });
     }
