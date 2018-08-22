@@ -26,7 +26,12 @@ router.post("/signup", function (req, res) {
     });
 });
 router.get("/signin", function (req, res) {
-    res.send("I am in GET signin");
+  console.log("I'm in !");
+  var query = dbConnection.query(
+    'SELECT * FROM users WHERE email=? AND password=?', req.body.email, req.body.password, function (error, results, fields) {
+
+    });
+  res.send("I am in GET signin");
 });
 
 /*

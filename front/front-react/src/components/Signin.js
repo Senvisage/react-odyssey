@@ -21,7 +21,7 @@ class Signin extends Component {
     event.preventDefault();
     console.log("Submitted form :  ");
     console.log(this.state);
-    fetch("/auth/Signin", {
+    fetch("/auth/signin", {
         method:  'GET',
         headers:  new  Headers({
             'Content-Type':  'application/json'
