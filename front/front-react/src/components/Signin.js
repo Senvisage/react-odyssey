@@ -20,7 +20,7 @@ class Signin extends Component {
   onSubmit = event => {
     event.preventDefault();
     fetch("/auth/signin", {
-      method: "GET",
+      method: "POST",
       headers: new Headers({
         "Content-Type": "application/json"
       }),
