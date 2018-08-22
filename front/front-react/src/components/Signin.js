@@ -23,7 +23,8 @@ class Signin extends Component {
       method: "GET",
       headers: new Headers({
         "Content-Type": "application/json"
-      })
+      }),
+      body: JSON.stringify(this.state)
     })
       .then(res => res.json())
       .then(
