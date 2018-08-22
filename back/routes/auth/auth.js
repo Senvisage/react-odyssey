@@ -33,6 +33,7 @@ router.post("/signin", function(req, res) {
     function(error, results, fields) {
       //Crashed
       if (error) res.status(500).json({ flash: error.message });
+      console.log(results);
 
       //Not found
       if (results.rows === undefined) {
