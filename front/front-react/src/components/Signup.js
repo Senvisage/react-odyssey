@@ -22,8 +22,6 @@ class Signup extends Component {
   //------------------------------------------------------------------- Handlers
   onSubmit = (event) => {
     event.preventDefault();
-    console.log("Submitted form :  ");
-    console.log(this.state);
     fetch("/auth/signup", {
         method:  'POST',
         headers:  new  Headers({
@@ -63,7 +61,7 @@ class Signup extends Component {
     //const {email} = this.state;
     return (
       <div className="Signup">
-        <h1>S'inscrire</h1>
+        <h1>Sign up</h1>
         <blockquote>{JSON.stringify(this.state,1,1)}</blockquote>
         <form onSubmit={this.onSubmit}>
           <TextField  type="text" name="email" placeholder="Your E-mail" onChange={this.updateEmail} />

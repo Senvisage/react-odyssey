@@ -23,10 +23,6 @@ dbConnection.connect(function(err) {
 });
 
 // ---------------------------------------------------------- API implementation
-app.get("/", (req,res) => {
-    res.send("Welcome Home");
-})
-
 // Auth Routes
 var auth = require('./routes/auth/auth');
 app.use('/auth', auth);
