@@ -23,15 +23,14 @@ router.post("/signup", function(req, res) {
   });
 });
 router.get("/signin", function(req, res) {
-  var query = dbConnection.query(
-    "SELECT * FROM users WHERE email=? AND password=?",
-    req.body.email,
-    req.body.password,
-    function(error, results, fields) {
-      if (error) res.status(500).json({ flash: error.message });
-      res.status(200).json(results);
-    }
-  );
+  var query = dbConnection.query("SELECT * FROM users", function(
+    error,
+    results,
+    fields
+  ) {
+    if (error) res.status(500).json({ flash: error.message });
+    res.status(200).json(results);
+  });
 });
 
 //Final export
