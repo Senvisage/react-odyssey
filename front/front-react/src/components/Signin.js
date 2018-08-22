@@ -29,6 +29,7 @@ class Signin extends Component {
   };
   onSubmitSuccess = data => {
     console.log("Todo: set App state with ajax data on 'Login' [Signin]");
+    this.props.signinHandleLogIn(data);
   };
   updateEmail = event => {
     this.setState({ email: event.target.value });
