@@ -27,8 +27,7 @@ router.post("/signin", function(req, res) {
     "Fetching users matching " + req.body.email + "/" + req.body.password
   );
   var query = dbConnection.query(
-    //"SELECT * FROM users WHERE email=? AND password=? LIMIT 1",
-    "SELECT * FROM users LIMIT 1",
+    "SELECT * FROM users WHERE email=? AND password=? LIMIT 1",
     [req.body.email, req.body.password],
     function(error, results, fields) {
       //Crashed
