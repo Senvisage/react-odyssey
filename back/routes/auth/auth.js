@@ -44,11 +44,11 @@ router.post("/signin", function(req, res) {
         res.status(200).json({
           flash:
             "User " +
-            results.rows[0].name +
+            results[0].name +
             " " +
-            results.rows[0].lastname +
+            results[0].lastname +
             " has been signed in !",
-          email: results.rows[0].email
+          email: results[0].email
         });
       }
     }
