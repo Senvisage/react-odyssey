@@ -5,17 +5,7 @@ import { Link } from "react-router-dom";
 
 import "./Signin.css";
 
-const DEFAULT_STATE = {
-  email: "mon@email.com",
-  password: "monPassw0rd",
-  flash: ""
-};
 class Signin extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { ...DEFAULT_STATE };
-  }
-
   //------------------------------------------------------------------- Handlers
   onSubmit = event => {
     event.preventDefault();
@@ -29,13 +19,16 @@ class Signin extends Component {
       .then(res => res.json())
       .then(
         res => {
-          this.setState({ flash: res.flash });
+          this.onSubmitSuccess();
           this.props.history.push("/profile");
         },
         err => {
           this.setState({ flash: err.flash });
         }
       );
+  };
+  onSubmitSuccess = data => {
+    console.log("Todo: set App state with ajax data on 'Login' [Signin]");
   };
   updateEmail = event => {
     this.setState({ email: event.target.value });

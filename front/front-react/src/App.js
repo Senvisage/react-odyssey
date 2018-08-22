@@ -14,6 +14,8 @@ const theme = createMuiTheme();
 const DEFAULT_STATE = {
   profile: {
     email: "homer.simpson@wildcodeschool.fr",
+    password: "D'oh !",
+    passwordbis: "D'oh !",
     name: "Homer",
     lastname: "Simpson"
   }
@@ -23,6 +25,15 @@ class App extends Component {
     super(props);
     this.state = { ...DEFAULT_STATE };
   }
+
+  profileHandleLogOut = event => {
+    console.log("Todo: Reset state.profile on 'Log out'");
+  };
+
+  signinHandleLogIn = event => {
+    console.log("Todo: Set state.profile on 'Log in' [App]");
+  };
+
   render() {
     return (
       <MuiThemeProvider theme={theme}>
@@ -45,12 +56,23 @@ class App extends Component {
                   <BrowserRouter>
                     <Switch>
                       <Route exact path="/" component={Signin} />
-                      <Route path="/signup" component={Signup} />
+                      <Route
+                        path="/signup"
+                        component={Signup}
+                        onLogIn={this.signinHandleLogIn}
+                      />
                       <Route path="/signin" component={Signin} />
                       <Route
                         path="/profile"
-                        component={Profile}
-                        profile={this.state.profile}
+                        render={props => (
+                          <Profile
+                            {...props}
+                            email={this.state.profile.email}
+                            name={this.state.profile.name}
+                            lastname={this.state.profile.lastname}
+                            onLogOut={this.profileHandleLogOut}
+                          />
+                        )}
                       />
                     </Switch>
                   </BrowserRouter>

@@ -7,13 +7,9 @@ import Button from "@material-ui/core/Button";
 import "./Profile.css";
 
 class Profile extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   //------------------------------------------------------------------- Handlers
-
   onLogoutClick = event => {
+    this.props.onLogOut();
     this.props.history.push("/");
   };
 
