@@ -14,7 +14,6 @@ class Profile extends Component {
   //------------------------------------------------------------------- Handlers
 
   onLogoutClick = event => {
-    this.setState(DEFAULT_STATE);
     this.props.history.push("/");
   };
 
