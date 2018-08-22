@@ -32,6 +32,8 @@ router.post("/signin", function(req, res) {
     function(error, results, fields) {
       if (error) res.status(500).json({ flash: error.message });
 
+      if (results.rows === undefined)
+        res.status(500).json({ flash: "No user found !" });
       console.log("Rows retrieved: ", results.rows.length); //Debug
       res.status(200).json({
         flash: "User has been signed up !",
