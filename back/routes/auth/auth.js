@@ -38,19 +38,19 @@ router.post("/signin", function(req, res) {
       if (results.rows === undefined) {
         console.log("It seems we found no one...");
         res.status(500).json({ flash: "No user found !" });
+      } else {
+        //All went well
+        console.log("Rows retrieved: ", results.rows.length); //Debug
+        res.status(200).json({
+          flash:
+            "User " +
+            results.rows[0].name +
+            " " +
+            results.rows[0].lastname +
+            " has been signed in !",
+          email: results.rows[0].email
+        });
       }
-
-      //All went well
-      console.log("Rows retrieved: ", results.rows.length); //Debug
-      res.status(200).json({
-        flash:
-          "User " +
-          results.rows[0].name +
-          " " +
-          results.rows[0].lastname +
-          " has been signed in !",
-        email: results.rows[0].email
-      });
     }
   );
 });
