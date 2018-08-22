@@ -22,7 +22,7 @@ router.post("/signup", function(req, res) {
     res.end();
   });
 });
-router.get("/signin", function(req, res) {
+router.post("/signin", function(req, res) {
   var query = dbConnection.query(
     "SELECT * FROM users WHERE email=? AND password=?",
     [req.body.email, req.body.password],
