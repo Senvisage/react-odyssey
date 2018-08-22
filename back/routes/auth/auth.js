@@ -28,12 +28,10 @@ router.post("/signin", function(req, res) {
     [req.body.email, req.body.password],
     function(error, results, fields) {
       if (error) res.status(500).json({ flash: error.message });
-      res
-        .status(200)
-        .json({
-          flash: "User has been signed up !",
-          email: result.rows[0].email
-        });
+      res.status(200).json({
+        flash: "User has been signed up !",
+        email: results.rows[0].email
+      });
     }
   );
 });
