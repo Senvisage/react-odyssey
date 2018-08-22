@@ -27,23 +27,17 @@ router.post("/signin", function(req, res) {
     "Fetching users matching " + req.body.email + "/" + req.body.password
   );
   var query = dbConnection.query(
+    //"SELECT * FROM users WHERE email=? AND password=? LIMIT 1",
     "SELECT * FROM users WHERE email=? AND password=? LIMIT 1",
     [req.body.email, req.body.password],
     function(error, results, fields) {
       //Crashed
-      if (error)
-        res
-          .status(500)
-          .json({ flash: error.message })
-          .end();
+      if (error) res.status(500).json({ flash: error.message });
 
       //Not found
       if (results.rows === undefined) {
         console.log("It seems we found no one...");
-        res
-          .status(500)
-          .json({ flash: "No user found !" })
-          .end();
+        res.status(500).json({ flash: "No user found !" });
       }
 
       //All went well
