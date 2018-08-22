@@ -6,16 +6,9 @@ import Button from "@material-ui/core/Button";
 
 import "./Profile.css";
 
-const DEFAULT_STATE = {
-  email: "",
-  name: "",
-  lastname: "",
-  flash: ""
-};
 class Profile extends Component {
   constructor(props) {
     super(props);
-    this.state = { ...DEFAULT_STATE };
   }
 
   //------------------------------------------------------------------- Handlers
@@ -30,16 +23,16 @@ class Profile extends Component {
     return (
       <div className="Profile">
         <h1>Mon Profil</h1>
-        <blockquote>{JSON.stringify(this.state, 1, 1)}</blockquote>
+        <blockquote>{JSON.stringify(this.props, 1, 1)}</blockquote>
         <List>
           <ListItem>
-            <ListItemText>E-Mail: {this.state.email}</ListItemText>
+            <ListItemText>E-Mail: {this.props.email}</ListItemText>
           </ListItem>
           <ListItem>
-            <ListItemText>Name: {this.state.name}</ListItemText>
+            <ListItemText>Name: {this.props.name}</ListItemText>
           </ListItem>
           <ListItem>
-            <ListItemText>Lastname: {this.state.lastname}</ListItemText>
+            <ListItemText>Lastname: {this.props.lastname}</ListItemText>
           </ListItem>
         </List>
         <Button color="primary" onClick={this.onLogoutClick}>

@@ -11,7 +11,13 @@ import Signin from "./components/Signin";
 import Profile from "./components/Profile";
 
 const theme = createMuiTheme();
-const DEFAULT_STATE = {};
+const DEFAULT_STATE = {
+  profile: {
+    email: "homer.simpson@wildcodeschool.fr",
+    name: "Homer",
+    lastname: "Simpson"
+  }
+};
 class App extends Component {
   constructor(props) {
     super(props);
@@ -41,7 +47,11 @@ class App extends Component {
                       <Route exact path="/" component={Signin} />
                       <Route path="/signup" component={Signup} />
                       <Route path="/signin" component={Signin} />
-                      <Route path="/profile" component={Profile} />
+                      <Route
+                        path="/profile"
+                        component={Profile}
+                        profile={this.state.profile}
+                      />
                     </Switch>
                   </BrowserRouter>
                 </Grid>
