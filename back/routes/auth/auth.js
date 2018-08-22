@@ -40,7 +40,7 @@ router.post("/signin", function(req, res) {
         res.status(500).json({ flash: "No user found !" });
       } else {
         //All went well
-        console.log("Rows retrieved: ", results.rows.length); //Debug
+        console.log("Rows retrieved: ", results.length); //Debug
         res.status(200).json({
           flash:
             "User " +
