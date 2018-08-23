@@ -36,7 +36,7 @@ class App extends Component {
   };
 
   signHandleSignUp = data => {
-    console.log("Todo: Set up the state for the new subsribed user ! [App]");
+    this.setState(data);
   };
 
   render() {
