@@ -18,7 +18,6 @@ class Profile extends Component {
     return (
       <div className="Profile">
         <h1>Mon Profil</h1>
-        <blockquote>{JSON.stringify(this.props, 1, 1)}</blockquote>
         <List>
           <ListItem>
             <ListItemText>E-Mail: {this.props.email}</ListItemText>

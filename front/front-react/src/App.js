@@ -9,6 +9,7 @@ import "./App.css";
 import Signup from "./components/Signup";
 import Signin from "./components/Signin";
 import Profile from "./components/Profile";
+import Notification from "./components/Notification";
 
 const theme = createMuiTheme();
 const DEFAULT_STATE = {
@@ -19,7 +20,10 @@ const DEFAULT_STATE = {
     name: "",
     lastname: ""
   },
-  flash: ""
+  notification: {
+    open: false,
+    flash: ""
+  }
 };
 class App extends Component {
   constructor(props) {
@@ -27,21 +31,41 @@ class App extends Component {
     this.state = { ...DEFAULT_STATE };
   }
 
+  notificationHandleClose = data => {
+    this.setState({
+      notification: { flash: this.state.notification.flash, open: false }
+    });
+  };
+
   profileHandleLogOut = data => {
-    this.setState({ flash: data.flash, profile: DEFAULT_STATE.profile });
+    this.setState({
+      notification: { flash: data.flash, open: true },
+      profile: DEFAULT_STATE.profile
+    });
   };
 
   signinHandleLogIn = data => {
-    this.setState(data);
+    this.setState({
+      notification: { flash: data.flash, open: true },
+      profile: data.profile
+    });
   };
 
   signHandleSignUp = data => {
-    this.setState(data);
+    this.setState({
+      notification: { flash: data.flash, open: true },
+      profile: DEFAULT_STATE.profile
+    });
   };
 
   render() {
     return (
       <MuiThemeProvider theme={theme}>
+        <Notification
+          flash={this.state.notification.flash}
+          open={this.state.notification.open}
+          onClose={this.notificationHandleClose}
+        />
         <Grid container alignItems="center" style={{ height: "100%" }}>
           <Grid item xs={12}>
             <Paper elevation={4} style={{ margin: 32 }}>

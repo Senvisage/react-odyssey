@@ -16,16 +16,20 @@ class Signin extends Component {
       }),
       body: JSON.stringify(this.state)
     })
-      .then(res => res.json())
+      .then(res => {
+        if (res.ok) return res.json();
+        else throw new Error(res.statusText);
+      })
       .then(
         res => {
           this.props.onLogIn(res);
           this.props.history.push("/profile");
         },
         err => {
-          this.setState({ flash: err.flash });
+          this.props.onLogIn({ flash: err.flash });
         }
-      );
+      )
+      .catch(err => this.props.onLogIn({ flash: err.message }));
   };
   updateEmail = event => {
     this.setState({ email: event.target.value });
@@ -39,7 +43,6 @@ class Signin extends Component {
     return (
       <div className="Signin">
         <h1>Sign in</h1>
-        <blockquote>{JSON.stringify(this.state, 1, 1)}</blockquote>
         <form onSubmit={this.onSubmit}>
           <TextField
             type="text"
