@@ -13,11 +13,11 @@ import Profile from "./components/Profile";
 const theme = createMuiTheme();
 const DEFAULT_STATE = {
   profile: {
-    email: "homer.simpson@wildcodeschool.fr",
-    password: "D'oh !",
-    passwordbis: "D'oh !",
-    name: "Homer",
-    lastname: "Simpson"
+    email: "",
+    password: "",
+    passwordbis: "",
+    name: "",
+    lastname: ""
   },
   flash: ""
 };
@@ -28,8 +28,6 @@ class App extends Component {
   }
 
   profileHandleLogOut = data => {
-    console.log("Todo: Reset state.profile on 'Log out' [App]");
-    console.log(data);
     this.setState({ flash: data.flash, profile: DEFAULT_STATE.profile });
   };
 
