@@ -14,6 +14,7 @@ import Notification from "./components/Notification";
 const theme = createMuiTheme();
 const DEFAULT_STATE = {
   profile: {
+    id: null,
     email: "",
     password: "",
     passwordbis: "",
@@ -47,7 +48,7 @@ class App extends Component {
   signinHandleLogIn = data => {
     this.setState({
       notification: { flash: data.flash, open: true },
-      profile: data.profile
+      profile: data.user
     });
   };
 

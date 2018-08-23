@@ -45,11 +45,9 @@ class Signup extends Component {
 
   //--------------------------------------------------------------------- Render
   render() {
-    //const {email} = this.state;
     return (
       <div className="Signup">
         <h1>Sign up</h1>
-        <blockquote>{JSON.stringify(this.state, 1, 1)}</blockquote>
         <form onSubmit={this.onSubmit}>
           <TextField
             type="text"
