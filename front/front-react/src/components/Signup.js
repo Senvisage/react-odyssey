@@ -5,20 +5,7 @@ import { Link } from "react-router-dom";
 
 import "./Signup.css";
 
-const DEFAULT_STATE = {
-  email: "mon@email.com",
-  password: "monPassw0rd",
-  passwordbis: "monPassw0rd",
-  name: "James",
-  lastname: "Bond",
-  flash: ""
-};
 class Signup extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { ...DEFAULT_STATE };
-  }
-
   //------------------------------------------------------------------- Handlers
   onSubmit = event => {
     event.preventDefault();
@@ -32,11 +19,12 @@ class Signup extends Component {
       .then(res => res.json())
       .then(
         res => {
-          this.setState({ flash: res.flash });
+          console.log("Everything was fine while signing up ! [Signup]");
+          this.props.onSignUp(res);
           this.props.history.push("/signin");
         },
         err => {
-          this.setState({ flash: err.flash });
+          console.log("Got an error while signing up ! [Signup]");
         }
       );
   };

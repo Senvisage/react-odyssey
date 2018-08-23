@@ -35,6 +35,10 @@ class App extends Component {
     this.setState(data);
   };
 
+  signHandleSignUp = data => {
+    console.log("Todo: Set up the state for the new subsribed user ! [App]");
+  };
+
   render() {
     return (
       <MuiThemeProvider theme={theme}>
@@ -69,7 +73,18 @@ class App extends Component {
                           />
                         )}
                       />
-                      <Route path="/signup" component={Signup} />
+                      <Route
+                        path="/signup"
+                        render={props => (
+                          <Signup
+                            {...props}
+                            email={this.state.profile.email}
+                            name={this.state.profile.name}
+                            lastname={this.state.profile.lastname}
+                            onSignUp={this.signHandleSignUp}
+                          />
+                        )}
+                      />
                       <Route
                         path="/signin"
                         render={props => (
