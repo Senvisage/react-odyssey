@@ -29,13 +29,15 @@ router.post("/signin", function(req, res) {
   passport.authenticate("local", (err, user, info) => {
     //Crashed
     if (err) return res.status(500).send(err);
-
     //No user
     if (!user)
       return res.status(400).json({ flash: "No matching user found !" });
 
     //All went well
-    return res.json({ user });
+    return res.json({
+      user,
+      flash: "User " + user.name + " " + user.lastname + " logged in !"
+    });
   })(req, res);
 });
 
