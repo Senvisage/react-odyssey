@@ -19,7 +19,6 @@ class Signup extends Component {
       .then(res => res.json())
       .then(
         res => {
-          console.log("Everything was fine while signing up ! [Signup]");
           this.props.onSignUp(res);
           this.props.history.push("/signin");
         },
