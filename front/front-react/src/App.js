@@ -16,7 +16,7 @@ class App extends Component {
   render() {
     return (
       <MuiThemeProvider theme={theme}>
-        <Notification flash="Test" open={true} />
+        <Notification />
         <Grid container alignItems="center" style={{ height: "100%" }}>
           <Grid item xs={12}>
             <Paper elevation={4} style={{ margin: 32 }}>
