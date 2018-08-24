@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
@@ -34,4 +35,4 @@ class Profile extends Component {
     );
   }
 }
-export default Profile;
+export default connect()(Profile);

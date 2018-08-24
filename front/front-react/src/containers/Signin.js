@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
@@ -20,7 +21,14 @@ class Signin extends Component {
       })
       .then(
         res => {
-          this.props.onLogIn(res);
+          this.props.dispatch({
+            type: "CREATE_SESSION",
+            user: res.user,
+            token: res.token,
+            notification: { flash: res.flash, open: true }
+          });
+
+          //this.props.onLogIn(res);
           this.props.history.push("/profile");
         },
         err => {
@@ -63,4 +71,4 @@ class Signin extends Component {
     );
   }
 }
-export default Signin;
+export default connect()(Signin);
