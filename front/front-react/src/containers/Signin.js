@@ -3,6 +3,15 @@ import { connect } from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
+import { changeFlash, createSession } from "../actions";
+
+function mapStateToProps(state) {
+  return {
+    flash: state.flash,
+    user: state.user,
+    auth: state.auth
+  };
+}
 
 class Signin extends Component {
   //------------------------------------------------------------------- Handlers
@@ -21,21 +30,15 @@ class Signin extends Component {
       })
       .then(
         res => {
-          this.props.dispatch({
-            type: "CREATE_SESSION",
-            user: res.user,
-            token: res.token,
-            notification: { flash: res.flash, open: true }
-          });
-
-          //this.props.onLogIn(res);
+          this.props.dispatch(changeFlash(res.flash));
+          this.props.dispatch(createSession(res.token));
           this.props.history.push("/profile");
         },
         err => {
-          this.props.onLogIn({ flash: err.flash });
+          this.props.dispatch(changeFlash(err.flash));
         }
       )
-      .catch(err => this.props.onLogIn({ flash: err.message }));
+      .catch(err => this.props.dispatch(changeFlash(err.flash)));
   };
   updateEmail = event => {
     this.setState({ email: event.target.value });
@@ -71,4 +74,4 @@ class Signin extends Component {
     );
   }
 }
-export default connect()(Signin);
+export default connect(mapStateToProps)(Signin);

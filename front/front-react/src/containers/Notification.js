@@ -3,6 +3,16 @@ import { withStyles } from "@material-ui/core/styles";
 import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
+import { connect } from "react-redux";
+import { closeFlash } from "../actions";
+
+function mapStateToProps(state) {
+  return {
+    flash: state.flash,
+    user: state.user,
+    auth: state.auth
+  };
+}
 
 const styles = theme => ({
   close: {
@@ -10,13 +20,12 @@ const styles = theme => ({
     height: theme.spacing.unit * 4
   }
 });
-
 class Notification extends Component {
   handleClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-    this.props.onClose();
+    this.props.dispatch(closeFlash());
   };
 
   render() {
@@ -28,13 +37,13 @@ class Notification extends Component {
             vertical: "bottom",
             horizontal: "left"
           }}
-          open={this.props.open}
+          open={this.props.flash.open}
           autoHideDuration={3000}
           onClose={this.handleClose}
           ContentProps={{
             "aria-describedby": "message-id"
           }}
-          message={<span id="message-id">{this.props.flash}</span>}
+          message={<span id="message-id">{this.props.flash.message}</span>}
           action={[
             <IconButton
               key="close"
@@ -51,4 +60,4 @@ class Notification extends Component {
     );
   }
 }
-export default withStyles(styles)(Notification);
+export default withStyles(styles)(connect(mapStateToProps)(Notification));
