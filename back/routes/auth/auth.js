@@ -38,7 +38,7 @@ router.post("/signin", function(req, res) {
     //All went well
     const token = jwt.sign(user, configkeys.tokenJWT);
     return res.json({
-      user,
+      user: { email: user.email },
       flash: "User " + user.name + " " + user.lastname + " logged in !",
       token: token
     });

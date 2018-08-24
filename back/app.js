@@ -77,7 +77,12 @@ app.get("/profile", passport.authenticate("jwt", { session: false }), function(
   req,
   res
 ) {
-  res.send(req.user);
+  const value = {
+    email: req.user.email,
+    name: req.user.name,
+    lastname: req.user.lastname
+  };
+  res.send(value);
 });
 
 // #404 'Not Found'
