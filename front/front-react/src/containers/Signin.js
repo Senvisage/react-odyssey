@@ -1,9 +1,17 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
+import { changeFlash, createSession } from "../actions";
 
-import "./Signin.css";
+function mapStateToProps(state) {
+  return {
+    flash: state.flash,
+    user: state.user,
+    auth: state.auth
+  };
+}
 
 class Signin extends Component {
   //------------------------------------------------------------------- Handlers
@@ -16,16 +24,23 @@ class Signin extends Component {
       }),
       body: JSON.stringify(this.state)
     })
-      .then(res => res.json())
+      .then(res => {
+        if (res.ok) return res.json();
+        else throw new Error(res.statusText);
+      })
       .then(
         res => {
-          this.props.onLogIn(res);
+          this.props.dispatch(changeFlash(res.flash));
+          this.props.dispatch(createSession(res.token));
           this.props.history.push("/profile");
         },
         err => {
-          this.setState({ flash: err.flash });
+          this.props.dispatch(
+            changeFlash("Une erreur est survenue (Utilisateur/mdp invalide ?)")
+          );
         }
-      );
+      )
+      .catch(err => this.props.dispatch(changeFlash(err.flash)));
   };
   updateEmail = event => {
     this.setState({ email: event.target.value });
@@ -39,7 +54,6 @@ class Signin extends Component {
     return (
       <div className="Signin">
         <h1>Sign in</h1>
-        <blockquote>{JSON.stringify(this.state, 1, 1)}</blockquote>
         <form onSubmit={this.onSubmit}>
           <TextField
             type="text"
@@ -62,4 +76,4 @@ class Signin extends Component {
     );
   }
 }
-export default Signin;
+export default connect(mapStateToProps)(Signin);

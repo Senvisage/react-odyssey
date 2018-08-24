@@ -1,6 +1,10 @@
 var express = require("express");
 var router = express.Router();
 const dbConnection = require("./../../helpers/db.js");
+const configkeys = require("./../../helpers/configkeys.js");
+const bcrypt = require("bcrypt");
+const passport = require("passport");
+const jwt = require("jsonwebtoken");
 
 // Routes
 // Don't forget that the "/auth" prefix is already specified in app.js !
@@ -8,7 +12,7 @@ const dbConnection = require("./../../helpers/db.js");
 router.post("/signup", function(req, res) {
   const newUser = {
     email: req.body.email,
-    password: req.body.password,
+    password: bcrypt.hashSync(req.body.password, 10),
     name: req.body.name,
     lastname: req.body.lastname
   };
@@ -22,42 +26,23 @@ router.post("/signup", function(req, res) {
     res.end();
   });
 });
-router.post("/signin", function(req, res) {
-  console.log(
-    "Fetching users matching " + req.body.email + "/" + req.body.password
-  );
-  var query = dbConnection.query(
-    "SELECT * FROM users WHERE email=? AND password=? LIMIT 1",
-    [req.body.email, req.body.password],
-    function(error, results, fields) {
-      //Crashed
-      if (error) res.status(500).json({ flash: error.message });
 
-      //Not found
-      if (results[0] === undefined) {
-        console.log("It seems we found no one...");
-        res.status(500).json({ flash: "No user found !" });
-      } else {
-        //All went well
-        console.log("Rows retrieved: ", results.length); //Debug
-        res.status(200).json({
-          flash:
-            "User " +
-            results[0].name +
-            " " +
-            results[0].lastname +
-            " has been signed in !",
-          profile: {
-            email: results[0].email,
-            name: results[0].name,
-            lastname: results[0].lastname,
-            password: results[0].password,
-            passwordbis: results[0].password
-          }
-        });
-      }
-    }
-  );
+router.post("/signin", function(req, res) {
+  passport.authenticate("local", (err, user, info) => {
+    //Crashed
+    if (err) return res.status(500).send(err);
+    //No user
+    if (!user)
+      return res.status(400).json({ flash: "No matching user found !" });
+
+    //All went well
+    const token = jwt.sign(user, configkeys.tokenJWT);
+    return res.json({
+      user: { email: user.email },
+      flash: "User " + user.name + " " + user.lastname + " logged in !",
+      token: token
+    });
+  })(req, res);
 });
 
 //Final export

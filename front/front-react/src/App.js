@@ -6,38 +6,19 @@ import { Switch, Route } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 
 import "./App.css";
-import Signup from "./components/Signup";
-import Signin from "./components/Signin";
-import Profile from "./components/Profile";
+import requireAuth from "./hoc/requireAuth";
+import requireNotAuth from "./hoc/requireNotAuth";
+import Signup from "./containers/Signup";
+import Signin from "./containers/Signin";
+import Profile from "./containers/Profile";
+import Notification from "./containers/Notification";
 
 const theme = createMuiTheme();
-const DEFAULT_STATE = {
-  profile: {
-    email: "",
-    password: "",
-    passwordbis: "",
-    name: "",
-    lastname: ""
-  },
-  flash: ""
-};
 class App extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { ...DEFAULT_STATE };
-  }
-
-  profileHandleLogOut = data => {
-    this.setState({ flash: data.flash, profile: DEFAULT_STATE.profile });
-  };
-
-  signinHandleLogIn = data => {
-    this.setState(data);
-  };
-
   render() {
     return (
       <MuiThemeProvider theme={theme}>
+        <Notification />
         <Grid container alignItems="center" style={{ height: "100%" }}>
           <Grid item xs={12}>
             <Paper elevation={4} style={{ margin: 32 }}>
@@ -58,41 +39,18 @@ class App extends Component {
                     <Switch>
                       <Route
                         exact
-                        path="/"
-                        render={props => (
-                          <Signin
-                            {...props}
-                            email={this.state.profile.email}
-                            name={this.state.profile.name}
-                            lastname={this.state.profile.lastname}
-                            onLogIn={this.signinHandleLogIn}
-                          />
-                        )}
-                      />
-                      <Route path="/signup" component={Signup} />
-                      <Route
-                        path="/signin"
-                        render={props => (
-                          <Signin
-                            {...props}
-                            email={this.state.profile.email}
-                            name={this.state.profile.name}
-                            lastname={this.state.profile.lastname}
-                            onLogIn={this.signinHandleLogIn}
-                          />
-                        )}
-                      />
-                      <Route
                         path="/profile"
-                        render={props => (
-                          <Profile
-                            {...props}
-                            email={this.state.profile.email}
-                            name={this.state.profile.name}
-                            lastname={this.state.profile.lastname}
-                            onLogOut={this.profileHandleLogOut}
-                          />
-                        )}
+                        component={requireAuth(Profile)}
+                      />
+                      <Route
+                        exact
+                        path="/signin"
+                        component={requireNotAuth(Signin)}
+                      />
+                      <Route
+                        exact
+                        path="/signup"
+                        component={requireNotAuth(Signup)}
                       />
                     </Switch>
                   </BrowserRouter>

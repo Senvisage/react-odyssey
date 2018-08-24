@@ -1,24 +1,11 @@
 import React, { Component } from "react";
+import { connect } from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
+import { changeFlash } from "../actions";
 
-import "./Signup.css";
-
-const DEFAULT_STATE = {
-  email: "mon@email.com",
-  password: "monPassw0rd",
-  passwordbis: "monPassw0rd",
-  name: "James",
-  lastname: "Bond",
-  flash: ""
-};
 class Signup extends Component {
-  constructor(props) {
-    super(props);
-    this.state = { ...DEFAULT_STATE };
-  }
-
   //------------------------------------------------------------------- Handlers
   onSubmit = event => {
     event.preventDefault();
@@ -29,16 +16,20 @@ class Signup extends Component {
       }),
       body: JSON.stringify(this.state)
     })
-      .then(res => res.json())
+      .then(res => {
+        if (res.ok) return res.json();
+        else throw new Error(res.statusText);
+      })
       .then(
         res => {
-          this.setState({ flash: res.flash });
+          this.props.dispatch(changeFlash(res.flash));
           this.props.history.push("/signin");
         },
         err => {
-          this.setState({ flash: err.flash });
+          this.props.dispatch(changeFlash("Une erreur inconnue est survenue"));
         }
-      );
+      )
+      .catch(err => this.props.dispatch(changeFlash(err.flash)));
   };
   updateEmail = event => {
     this.setState({ email: event.target.value });
@@ -58,11 +49,9 @@ class Signup extends Component {
 
   //--------------------------------------------------------------------- Render
   render() {
-    //const {email} = this.state;
     return (
       <div className="Signup">
         <h1>Sign up</h1>
-        <blockquote>{JSON.stringify(this.state, 1, 1)}</blockquote>
         <form onSubmit={this.onSubmit}>
           <TextField
             type="text"
@@ -103,4 +92,4 @@ class Signup extends Component {
     );
   }
 }
-export default Signup;
+export default connect()(Signup);
