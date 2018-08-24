@@ -24,7 +24,8 @@ const DEFAULT_STATE = {
   notification: {
     open: false,
     flash: ""
-  }
+  },
+  token: undefined
 };
 class App extends Component {
   constructor(props) {
@@ -41,21 +42,24 @@ class App extends Component {
   profileHandleLogOut = data => {
     this.setState({
       notification: { flash: data.flash, open: true },
-      profile: DEFAULT_STATE.profile
+      profile: DEFAULT_STATE.profile,
+      token: DEFAULT_STATE.token
     });
   };
 
   signinHandleLogIn = data => {
     this.setState({
       notification: { flash: data.flash, open: true },
-      profile: data.user
+      profile: data.user,
+      token: data.token
     });
   };
 
   signHandleSignUp = data => {
     this.setState({
       notification: { flash: data.flash, open: true },
-      profile: DEFAULT_STATE.profile
+      profile: DEFAULT_STATE.profile,
+      token: DEFAULT_STATE.token
     });
   };
 
