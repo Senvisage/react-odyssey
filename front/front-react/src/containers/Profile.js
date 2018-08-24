@@ -20,10 +20,6 @@ class Profile extends Component {
     fetch("/profile", {
       headers: {
         Authorization: "Bearer " + this.props.auth.token
-        /*Authorization:
-          "Bearer " +
-          "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MjQsImVtYWlsIjoic2VuIiwicGFzc3dvcmQiOiIkMmIkMTAkZWZ4Vkh3WTlDR2VJTmxjcGRUZ1dhZUdaZWRidVNLVGY4TnFRRVI1ZzFpVmpwbHAxZTZ6LzYiLCJuYW1lIjoic2VuIiwibGFzdG5hbWUiOiJzZW4iLCJpYXQiOjE1MzUxMjMxMjB9.8HK06mc7_2mk8wlftwzSBiwKGPzqWvPGLlFStGeV5gE"
-          */
       }
     })
       .then(res => {

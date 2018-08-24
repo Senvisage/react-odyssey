@@ -35,7 +35,9 @@ class Signin extends Component {
           this.props.history.push("/profile");
         },
         err => {
-          this.props.dispatch(changeFlash(err.flash));
+          this.props.dispatch(
+            changeFlash("Une erreur est survenue (Utilisateur/mdp invalide ?)")
+          );
         }
       )
       .catch(err => this.props.dispatch(changeFlash(err.flash)));

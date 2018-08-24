@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { Link } from "react-router-dom";
+import { changeFlash } from "../actions";
 
 class Signup extends Component {
   //------------------------------------------------------------------- Handlers
@@ -15,16 +16,20 @@ class Signup extends Component {
       }),
       body: JSON.stringify(this.state)
     })
-      .then(res => res.json())
+      .then(res => {
+        if (res.ok) return res.json();
+        else throw new Error(res.statusText);
+      })
       .then(
         res => {
-          this.props.onSignUp(res);
+          this.props.dispatch(changeFlash(res.flash));
           this.props.history.push("/signin");
         },
         err => {
-          console.log("Todo: Got an error while signing up ! [Signup]");
+          this.props.dispatch(changeFlash("Une erreur inconnue est survenue"));
         }
-      );
+      )
+      .catch(err => this.props.dispatch(changeFlash(err.flash)));
   };
   updateEmail = event => {
     this.setState({ email: event.target.value });
