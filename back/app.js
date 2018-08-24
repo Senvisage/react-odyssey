@@ -9,9 +9,12 @@ const mysql = require("mysql");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const JWTStrategy = require("passport-jwt").Strategy;
+const ExtractJWT = require("passport-jwt").ExtractJwt;
 
 const dbConnection = require("./helpers/db.js");
 const users = require("./helpers/users.js");
+const configkeys = require("./helpers/configkeys.js");
 
 // ----------------------------------------------------------- App configuration
 app.use(morgan("dev"));
@@ -50,6 +53,17 @@ passport.use(
     }
   )
 );
+passport.use(
+  new JWTStrategy(
+    {
+      jwtFromRequest: ExtractJWT.fromAuthHeaderAsBearerToken(),
+      secretOrKey: configkeys.tokenJWT
+    },
+    function(jwtPayload, cb) {
+      return cb(null, jwtPayload);
+    }
+  )
+);
 
 // ---------------------------------------------------------- API implementation
 // Auth Routes
@@ -58,6 +72,13 @@ app.use("/auth", auth);
 
 // Other routes
 //require("./routes/auth/auth")(app);
+
+app.get("/profile", passport.authenticate("jwt", { session: false }), function(
+  req,
+  res
+) {
+  res.send(req.user);
+});
 
 // #404 'Not Found'
 app.use(function(req, res, next) {

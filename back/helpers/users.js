@@ -12,7 +12,14 @@ exports.findByUsername = function(username, cb) {
       if (results[0] === undefined) return cb(null, null);
 
       //All went well
-      return cb(null, results[0]);
+      user = {
+        id: results[0].id,
+        email: results[0].email,
+        password: results[0].password,
+        name: results[0].name,
+        lastname: results[0].lastname
+      };
+      return cb(null, user);
     }
   );
 };

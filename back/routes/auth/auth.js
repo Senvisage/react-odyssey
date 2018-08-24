@@ -1,8 +1,10 @@
 var express = require("express");
 var router = express.Router();
 const dbConnection = require("./../../helpers/db.js");
+const configkeys = require("./../../helpers/configkeys.js");
 const bcrypt = require("bcrypt");
 const passport = require("passport");
+const jwt = require("jsonwebtoken");
 
 // Routes
 // Don't forget that the "/auth" prefix is already specified in app.js !
@@ -34,9 +36,11 @@ router.post("/signin", function(req, res) {
       return res.status(400).json({ flash: "No matching user found !" });
 
     //All went well
+    const token = jwt.sign(user, configkeys.tokenJWT);
     return res.json({
       user,
-      flash: "User " + user.name + " " + user.lastname + " logged in !"
+      flash: "User " + user.name + " " + user.lastname + " logged in !",
+      token: token
     });
   })(req, res);
 });
