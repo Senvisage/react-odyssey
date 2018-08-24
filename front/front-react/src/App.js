@@ -6,9 +6,9 @@ import { Switch, Route } from "react-router";
 import { BrowserRouter } from "react-router-dom";
 
 import "./App.css";
-import Signup from "./components/Signup";
-import Signin from "./components/Signin";
-import Profile from "./components/Profile";
+import Signup from "./containers/Signup";
+import Signin from "./containers/Signin";
+import Profile from "./containers/Profile";
 import Notification from "./components/Notification";
 
 const theme = createMuiTheme();
