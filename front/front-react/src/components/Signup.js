@@ -23,7 +23,7 @@ class Signup extends Component {
           this.props.history.push("/signin");
         },
         err => {
-          console.log("Got an error while signing up ! [Signup]");
+          console.log("Todo: Got an error while signing up ! [Signup]");
         }
       );
   };
