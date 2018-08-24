@@ -4,8 +4,6 @@ import Snackbar from "@material-ui/core/Snackbar";
 import IconButton from "@material-ui/core/IconButton";
 import CloseIcon from "@material-ui/icons/Close";
 
-import "./Notification.css";
-
 const styles = theme => ({
   close: {
     width: theme.spacing.unit * 4,
